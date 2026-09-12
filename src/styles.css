@@ -285,6 +285,12 @@ img, svg { display: block; }
 .form-status.ok { color: #1d6a4f; }
 .form-status.err { color: #a6412f; }
 .contact-form button[disabled] { opacity: .6; cursor: not-allowed; }
+.field-error { display: block; margin-top: 6px; color: #a6412f; font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.contact-form input.has-error, .contact-form textarea.has-error { border-color: #c9705d; background: #fdf6f4; }
+.contact-form input.has-error:focus, .contact-form textarea.has-error:focus { border-color: #a6412f; outline-color: #a6412f; }
+.field-foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.field-foot .field-error { margin-top: 6px; }
+.char-count { margin-top: 6px; margin-left: auto; color: #9aa4a0; font-size: 11px; font-weight: 700; letter-spacing: 0; text-transform: none; white-space: nowrap; }
 
 .footer { background: #071f1b; color: white; margin-top: 20px; padding: 72px 0 25px; }
 .footer-grid { display: grid; grid-template-columns: 1.45fr .6fr 1fr; gap: 80px; padding-bottom: 55px; }

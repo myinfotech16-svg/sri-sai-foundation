@@ -32,6 +32,7 @@ export async function initSchema() {
       id           INT AUTO_INCREMENT PRIMARY KEY,
       name         VARCHAR(120)  NOT NULL,
       email        VARCHAR(180)  NOT NULL,
+      phone        VARCHAR(30)   NULL,
       organisation VARCHAR(180)  NULL,
       message      TEXT          NOT NULL,
       ip           VARCHAR(45)   NULL,
@@ -40,4 +41,13 @@ export async function initSchema() {
       INDEX idx_created_at (created_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `);
+
+  // The table may predate the phone column, so add it if it's missing.
+  const [cols] = await pool.query(
+    `SELECT COLUMN_NAME FROM information_schema.COLUMNS
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'enquiries' AND COLUMN_NAME = 'phone'`
+  );
+  if (cols.length === 0) {
+    await pool.query('ALTER TABLE enquiries ADD COLUMN phone VARCHAR(30) NULL AFTER email');
+  }
 }
